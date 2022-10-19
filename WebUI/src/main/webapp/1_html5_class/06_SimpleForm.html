@@ -6,6 +6,14 @@
 </head>
 <body>
 
+<script>
+function passFunc() {
+	var pw1 = f.pass.value
+	var pw2 = f.passConfirm.value
+	if(pw1 != pw2){alert("비밀번호가 맞지 않습니다.")}
+}
+</script>
+
 <form>
 	<fieldset>
 		<legend> 회원가입 </legend>
@@ -48,13 +56,13 @@
 	</fieldset>
 </form>
 
-<form>
+<form name="f">
 	<fieldset>
 		<legend> 로그인 정보 </legend>
 		<ol>
 			<li>
 				<label for='id'> 아이디 </label>
-				<input type="text" id='id' name='id'>
+				<input type="text" id='id' name='id' required>
 			</li>
 			<li>
 				<label for='pass'> 비밀번호 </label>
@@ -70,9 +78,7 @@
 			</li>
 		</ol>
 	</fieldset>
-</form>
 
-<form action="#">
 	<fieldset>
 		<legend> 개인 정보</legend>
 		<ol>
@@ -86,26 +92,22 @@
 			</li>
 			<li>
 				<label for='tel'> 연락처 </label>
-				<input type="tel" id='tel' name='tel'>
+				<input type="tel" id='tel' name='tel' required>
 			</li>
 			<li>
 				<label for='birth'> 생일 </label>
-				<input type="date" id='birth' name='birth'>
+				<input type="date" id='birth' name='birth' required>
 			</li>
 		</ol>
 	</fieldset>
 
 	<fieldset>
-		<legend> 고딩 숙련도(상,중,하)</legend>
-		<ol>
-			<li>
-				<input type="range" id='prof' name='prof' min=0 max=100 value=50 step=50>
-			</li>
-		</ol>
+		<legend> 코딩 숙련도(상,중,하)</legend>
+		<input type="range" id='prof' name='prof' min=0 max=100 value=50 step=50>
 	</fieldset>
 
 	<fieldset>
-		<input type="submit">
+		<input type="submit" onclick="passFunc()">
 	</fieldset>
 </form>
 

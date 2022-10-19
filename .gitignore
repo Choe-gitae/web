@@ -5,6 +5,7 @@
 .metadata
 bin/
 tmp/
+Servers/
 *.tmp
 *.bak
 *.swp
@@ -119,9 +120,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-*.jpg
-*.gif
-*.png
 *.mp4
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,java

@@ -1,0 +1,49 @@
+<!-- 
+	인자있는 자바스크립스 함수 호출
+	
+	[연습] 이벤트 핸들러 방식이나 이벤트 리스너 방식으로 수정하세요 
+ -->
+ 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 화면 색 바꾸기 </title>
+<script type="text/javascript">
+	window.onload = function() {
+		
+		let btnA = document.getElementById("btnA");
+		let btnB = document.getElementById("btnB");
+		let btnC = document.getElementById("btnC");
+		
+		btnA.onclick = function() {
+			alert("넘겨받은 인자값 A");
+			document.bgColor = "yellow";
+			document.fgColor = "green";
+		}
+		btnB.onclick = function() {
+			alert("넘겨받은 인자값 B");
+			document.bgColor = "grey";
+			document.fgColor = "red";
+		}
+		btnC.onclick = function() {
+			alert("넘겨받은 인자값 C");
+			document.bgColor = "#FFFFFF";
+			document.fgColor = "cyan";
+		}
+		
+	}
+</script>
+</head>
+<body>
+	<form name="frm">
+		<input type="button" value="스타일 A" id="btnA" >
+		<input type="button" value="스타일 B" id="btnB" >
+		<input type="button" value="스타일 C" id="btnC" >
+	</form>
+	<ul>
+		<li><a href="http://www.cnn.com"> 여기는 미쿡 </a></li>
+		<li><a href="http://news.bbc.co.uk"> 여기는 영쿡 </a></li>
+	</ul>
+</body>
+</html>

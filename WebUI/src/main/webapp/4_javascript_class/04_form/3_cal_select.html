@@ -25,15 +25,65 @@ var lastDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var weeks = ['일','월','화','수','목','금','토'];
 
 
-window.onload = function(){
+window.onload = function() {
 	
 	var frm = document.frm;
 	
 	// 년 구하기
 	for( var j=year-5;  j<= year+5; j++){
-		frm.y.add( new Option(j, j));				// 만들고 브라우저 F12에서 Elements로 확인 : Option(j)와 Option(j,j) 차이
+		frm.y.add( new Option(j, j) );				// 만들고 브라우저 F12에서 Elements로 확인 : Option(j)와 Option(j,j) 차이
 	}
-
+	
+	// 월 구하기
+	for (var i = 1; i < 13; i++) {
+		frm.m.add( new Option(i, i) );
+	}
+	
+	// 일 구하기
+	for (var i = 1; i <= lastDays[month]; i++) {
+		frm.d.add( new Option(i, i) )
+	}
+	
+	// 오늘의 년,월,일 지정
+	frm.y.value = year;
+	frm.m.value = month + 1;
+	frm.d.value = date;
+	
+	frm.y.onchange = calc;
+	frm.m.onchange = calc;
+	frm.d.onchange = calc;
+	calc();
+	
+	
+	function calc() {
+		// (1) 화면에서 각각의 년,월,일 값을 얻어오기
+		let y = frm.y.value;
+		let m = frm.m.value;
+		let d = frm.d.value;
+		
+		// (2) Date() 객체에 각각의 년,월,일 값을 지정하기
+		today.setFullYear(y);
+		today.setMonth(m-1);
+		today.setDate(d);
+		
+		// (3) 해당 달의 일수 만큼 옵션추가 
+		if(y%4 == 0) {			// 윤년 계산
+			lastDays[1] = 29;
+		}
+		frm.d.options.length = 0;	// select option 삭제
+		for (var i = 1; i <= lastDays[m-1]; i++) {
+			frm.d.add( new Option(i, i) )
+		}
+		lastDays[1] = 28;
+		
+		frm.y.value = y;
+		frm.m.value = m;
+		frm.d.value = d;
+		
+		// (4) 해당 날짜의 요일을 구하여 화면 출력
+		frm.w.value = weeks[today.getDay()];
+	}
+	
 }
 </script>
 
@@ -41,8 +91,8 @@ window.onload = function(){
 <body>
 <form name='frm'>
 	<select name='y'></select> 년
-	<select name='m'></select>월
-	<select name='d'></select>일
+	<select name='m'></select> 월
+	<select name='d'></select> 일
 	<input type='text' name='w' size='4'>요일
 </form>
 </body>

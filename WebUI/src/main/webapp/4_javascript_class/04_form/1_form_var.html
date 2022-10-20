@@ -5,6 +5,20 @@
 <title></title>
 <script type="text/javascript">
 
+	window.onload = function() {
+		
+		document.myForm.txt0.value = "하하";
+		myForm["txt1"].value = "호호";
+		
+		document.getElementById("btn").onclick = function() {
+			for (let i = 0; i < 4; i++) {
+				// 각각의 텍스트필드에 data-0 / data-1 ...
+				myForm["txt"+i].value = "data-"+i ;
+			}
+		}
+		
+	}
+
 </script>
 </head>
 <body>

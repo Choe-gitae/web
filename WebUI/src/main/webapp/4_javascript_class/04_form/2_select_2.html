@@ -5,13 +5,59 @@
 <title> 폼 예제 2</title>
 </head>
 <script type="text/javascript">
+
+window.onload = function() {
+	
+	frm.up.onclick = function() {
+		let idx = frm.play.selectedIndex;
+		let optSel = frm.play.options;
+		let idxLength = frm.play.options.length
+		
+		if(idx > 0) {
+			let temp = optSel[idx].text;
+			optSel[idx].text = optSel[idx-1].text;
+			optSel[idx-1].text = temp;
+			optSel[idx-1].selected = true;
+		}else if(idx == 0) {
+			let temp = optSel[idx].text;
+			for (let i = 0; i < idxLength-1; i++) {
+				optSel[i].text = optSel[i+1].text;
+			}
+			optSel[idxLength-1].text = temp;
+			optSel[idxLength-1].selected = true;
+		}
+	}
+	
+	document.querySelector("#down").onclick = function() {
+		let idx = frm.play.selectedIndex;
+		let optSel = frm.play.options;
+		let idxLength = frm.play.options.length
+		
+		if(idx < idxLength-1) {
+			let temp = optSel[idx].text;
+			optSel[idx].text = optSel[idx+1].text;
+			optSel[idx+1].text = temp;
+			optSel[idx+1].selected = true;
+		}else if(idx == idxLength-1) {
+			let temp = optSel[idx].text;
+			for (let i = idxLength-1; i > 0; i--) {
+				optSel[i].text = optSel[i-1].text;
+			}
+			optSel[0].text = temp;
+			optSel[0].selected = true;
+		}
+	}
+	
+	//[optSel[idx].text, optSel[idx-1].text] = [optSel[idx-1].text, optSel[idx].text]
+}
+
 </script>
 <body>
 
 내가 제일 좋아하는 놀이 순서대로 한다면 <br>
 
 <form name="frm">
-<select name="play" size="8">
+<select name="play" size="10">
 	<option selected> 숨쉬기 </option>
 	<option> 밥먹기 </option>
 	<option> 그냥있기 </option>

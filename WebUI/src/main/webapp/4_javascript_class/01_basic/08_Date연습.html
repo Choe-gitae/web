@@ -4,17 +4,25 @@
 <meta charset="UTF-8">
 <title></title>
 <script type="text/javascript">
-	window.onload = function(){
-		document.getElementById('btn').onclick = function(){
-			 var s = document.getElementById('startDate').value;
-			 var e = document.getElementById('endDate').value;
-			 
-			 var sDate = new Date(s);
-			 var eDate = new Date(e);
-
 	
+	window.onload = function() {
+		
+		document.getElementById('btn').onclick = function() {
+			var s = document.getElementById('startDate').value;
+			var e = document.getElementById('endDate').value;
+
+			var sDate = new Date(s);
+			var eDate = new Date(e);
+			
+			let diff = eDate - sDate;
+			alert(diff);									// 시간 : ms
+			
+			let diff2 = Math.ceil(diff / (1000*60*60*24));	// 시간계산	ms > s > m > h > d
+			alert(diff2);
+			
 		}
 	}
+	
 </script>
 </head>
 <body>

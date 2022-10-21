@@ -14,8 +14,13 @@
 	var progress = document.getElementById("progress");
 	var current = 0;
 
-	
-	
+	//setTimeout(updateProgress, 1000);
+	setInterval(function() {
+				progress.value = ++current;
+					if( current==100 ) {
+						
+					}
+				}, 100);
 	
 
 	/* [참고]

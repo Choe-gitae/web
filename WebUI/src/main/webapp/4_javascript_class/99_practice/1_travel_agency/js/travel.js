@@ -1,6 +1,6 @@
 window.onload = function() {
 	
-	//let frm = document.querySelector("#frm");
+	let frm = document.getElementById("frm");
 	
 	// 드랍박스 성인, 아동, 유아 20명씩 추가
 	for(let i=0; i < 20; i++) {

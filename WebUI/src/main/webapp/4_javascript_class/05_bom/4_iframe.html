@@ -5,6 +5,18 @@
 <title> 부분독립페이지 </title>
 <script type="text/javascript">
 
+window.onload = function() {
+	
+	let sel = frm.site;
+	for (let s of sel) {
+		s.onclick = function() {
+			//alert(this.value);
+			ifrm.fm.result.value = this.value;	// s.value 가능
+		}
+	}
+	
+}
+
 </script>
 </head>
 <body>

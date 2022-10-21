@@ -1,25 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>자바스크립트 함수 만들기</title>
-	<script>
+<meta charset="UTF-8">
+<title>자바스크립트 함수 만들기</title>
+<script>
+	// (1) function 키워드 함수
+	function first() {
+		let txt = document.querySelector("#first");
+		txt.style.backgroundColor = "#CCCC44";
+		txt.style.color = "#457E38";
+	}
 
-	</script>
+	// (2) 함수리터럴   * 리터럴 : 변수의 값	
+	let second = function() {
+		let txt = document.getElementById("second");
+		txt.style.backgroundColor = "#6E810F";
+		txt.style.color = "#592306";
+	}
+
+	/*
+	// (3) Function 생성자
+	let third = new Function("let txt = document.getElementById("fourth"), txt.style.backgroundColor = "pink", txt.style.color = "yellow");
+	*/
+	
+	// (4) 애로우함수
+	let fourth = () => {
+		let txt = document.getElementById("fourth");
+		txt.style.backgroundColor = "black";
+		txt.style.color = "red";
+	}
+	
+</script>
 </head>
 
 <body>
 	<p> <span id="first"> 1. function 명령 </span>
 		<input type="button" value="확인" onclick="javascript:first()"/>
 	</p>
-	<p> <span id="third"> 2. 함수 리터럴 </span>
+	<p> <span id="second"> 2. 함수 리터럴 </span>
 		<input type="button" value="확인" onclick="javascript:second()"/>
 	</p>
-	<p> <span id="second"> Function 생성자 </span>
+	<p> <span id="third"> 3. Function 생성자 </span>
 		<input type="button" value="확인" onclick="javascript:third()"/>
 	</p>
 
-	<p> <span id="fourth"> 애로우 함수 </span>
+	<p> <span id="fourth"> 4. 애로우 함수 </span>
 		<input type="button" value="확인" onclick="javascript:fourth()"/>
 	</p>
 </body>

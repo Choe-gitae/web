@@ -6,6 +6,21 @@
 <script type="text/javascript">
 
 //@함수는 인자의 갯수를 체크하지 않는다.
+/*
+function multiple(first, second) {
+	return first*second;
+}
+document.write("1. 곱은 " + multiple(3,4) + "<br/>");
+document.write("1. 곱은 " + multiple(3,4,5) + "<br/>");	// 함수의 인자 수를 넘어가면 안받는다
+document.write("1. 곱은 " + multiple(3) + "<br/>");		// undefined 계산 // NaN
+*/
+
+function multiple(args) {
+	return args.first * args.second;	// 객체의 데이터로 계산
+}
+
+let obj = { first : 3, second :4 };		// 객체 형태
+document.write("2. 곱은 " + multiple(obj) + "<br/>");
 
 </script>
 </head>

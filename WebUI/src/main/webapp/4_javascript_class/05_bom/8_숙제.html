@@ -4,21 +4,33 @@
 <meta charset="UTF-8">
 <title>숙제</title>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="js/8_address.js"></script>
-
+<script src="js/8_address.js"></script>
 </head>
 
 <body>
 <form name="frm">
 <div>주소입력합니다.</div>
 
-<input type="text" id="addrResult" name="addrResult" readonly>
-<input type="button" id="addr" name="addr" value="주소찾기">
+<input type="text" id="address_kakao_result" name="address_kakao_result" size="50" readonly>
+<input type="button" id="address_kakao_search" name="address_kakao_search" value="주소찾기">
 <!-- 
 	- 다음카카오 개발자 모드
 	주소찾기 버튼이 눌렸을 때 카카오주소창이 열림
 	해당하는 주소를 선택하면 우리 텍스트필드에 출력
  -->
+
 </form>
+
+<!--  <script type="text/javascript">
+ window.onload = function(){
+	 document.getElementById("address_kakao_search").onclick = function() {
+		 new daum.Postcode({
+             oncomplete: function(data) { //선택시 입력값 세팅
+                 document.getElementById("address_kakao_result").value = data.address; 
+             }
+         }).open();
+	 }
+ }
+ </script> -->
 </body>
 </html>

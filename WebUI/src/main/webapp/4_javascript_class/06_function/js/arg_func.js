@@ -1,7 +1,7 @@
 // 함수의 인자로 들어오는 함수처리
 function arrayProcess( data, f ) { // 노드배열, 함수
 	for( key=0; key < data.length; key++ ){
-	//for(var key in data ){
+//	for(var key in data ){
 		f(  data[key].value );	// sum( frm.num[key].value )
 	}
 }

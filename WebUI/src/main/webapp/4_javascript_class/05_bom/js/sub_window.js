@@ -8,6 +8,4 @@ window.onload = function() {
             opener.frm.result.value = this.value;
          }
       }
-
-	
 }

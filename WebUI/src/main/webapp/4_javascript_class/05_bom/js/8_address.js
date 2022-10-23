@@ -1,13 +1,10 @@
 window.onload = function() {
 	
-frm.addr.onclick = function() {
-	new daum.Postcode({
-        oncomplete: function(data) {
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-            document.getElementsById("addrResult").value = data.address;
-        }
-    }).open();
-}
-	
+	document.getElementById("address_kakao_search").onclick = function() {
+		 new daum.Postcode({
+             oncomplete: function(data) { //선택시 입력값 세팅
+                 document.getElementById("address_kakao_result").value = data.address; 
+             }
+         }).open();
+	 }
 }

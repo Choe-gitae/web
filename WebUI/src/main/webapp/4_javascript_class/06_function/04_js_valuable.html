@@ -31,7 +31,7 @@
 	// 3. 지역변수 선언을 함수의 앞단에 습관
 	var scope = "글로벌변수";
 	function getValue() {
-		document.write("<0>" + scope + "<br/>");	// "<0>undefined" // 변수는 인식 하지만 값이 안 들어가 있다.
+		document.write("<0>" + scope + "<br/>");	// "<0>undefined" // 변수는 인식 하지만 값이 안들어 가있다.
 		var scope = "지역변수";
 		return scope;
 	}
@@ -49,13 +49,13 @@
 	document.write("i = " + i + "<br/>");
 //	document.write("j = " + j + "<br/>");	// 에러
 
-	for (var a = 0; a < 4; a++) {}			// 전역변수
-	for (var a = 0; a < 4; a++) {}			// var 변수는 변수명 중복 가능
-	document.write("a = " + a + "<br/>");	// var a 출력
+	for (var a = 0; a < 4; a++) {}
+	for (var a = 0; a < 4; a++) {}
+	document.write("a = " + a + "<br/>");
 
-	for (let a = 0; a < 4; a++) {}			// for문 내에서만 사용
-	for (let a = 0; a < 4; a++) {}			// for문 내에서만 사용
-	document.write("a = " + a + "<br/>");	// var a 출력
+	for (let a = 0; a < 4; a++) {}
+	for (let a = 0; a < 4; a++) {}
+	document.write("a = " + a + "<br/>");
 	
 	
 	</script>

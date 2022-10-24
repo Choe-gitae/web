@@ -11,7 +11,7 @@
 window.onload = function() {
 	
 	let sel = frm.site;
-	for (let s in sel) {
+	for (let s of sel) {
 		s.onclick = function() {
 			//alert(this.value);
 			switch (this.value) {	// s.value 가능

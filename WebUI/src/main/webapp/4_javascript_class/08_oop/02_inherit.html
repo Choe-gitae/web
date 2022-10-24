@@ -7,7 +7,7 @@
 <body>
 	<script>
 		// 부모클래스
-		var Animal = function(){ };
+		var Animal = function(){};
 		Animal.prototype = {
 			sound : function(){
 				document.writeln('울부짖다 <br/>');
@@ -18,8 +18,36 @@
 		};
 
 		// 자식클래스
-
-
+		var Dog = function(){}
+		Dog.prototype = new Animal();	// 상속관계
+		
+		var dog = new Dog();
+		dog.sound();
+		dog.move();
+		
+		Dog.prototype.sound = function(){	// 오버라이딩
+			document.write("왈왈 <br/>");
+		}
+		dog.sound();
+		
+		document.write("<hr/>");
+		/*
+			Human 클래스는 Animal 클래스를 상속받음.
+			Human 클래스의 객체를 생성하여 변수 ingan에 지정함
+			Animal 클래스의 move 함수를 오버라이딩 하여
+			move 함수 호출시 "인간은 두 발로 걷는다" 라고 출력함
+		*/
+		var Human = function() {}
+		Human.prototype = new Animal();	// 클래스 Human 클래스 Animal 상속
+		
+		var ingan = new Human();		// 자식클래스 Human 객체생성
+		Human.prototype.move = function(){	// move 오버라이딩
+			document.write("인간은 두 발로 걷는다 <br/>");
+		}
+		ingan.move();
+		ingan.sound();
+		dog.move();
+		dog.sound();
 
 	</script>
 </body>

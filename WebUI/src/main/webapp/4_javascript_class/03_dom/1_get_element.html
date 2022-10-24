@@ -47,7 +47,7 @@
 		*/
 			let me = document.getElementById("label");
 			let childs = me.childNodes;
-			//alert(childs.length);
+			alert(childs.length);
 			for (let i = 0; i < childs.length; i++) {
 				if( childs[i].nodeType===1 && childs[i].value=="" ){
 					alert(childs[i].name + "은 필수입력");
@@ -61,7 +61,6 @@
 			/* let name = document.querySelector(".cname");
 			let result = document.querySelector("#result");
 			result.innerHTML = "안녕하세요 " + name.value + "님"; */
-		
 		
 	}
   }

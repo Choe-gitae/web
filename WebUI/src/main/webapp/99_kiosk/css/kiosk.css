@@ -7,6 +7,11 @@ body {
 	line-height: 1.6
 }
 
+.container {
+	width: 700px;
+	float: left;
+}
+
 h2 {
 	
 }
@@ -15,6 +20,7 @@ ul.tabs {
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
+	height: 50px;
 }
 
 ul.tabs li {
@@ -40,16 +46,19 @@ ul.tabs li.current {
 .tab-content.current {
 	border: 2px solid black;
 	display: inherit;
-	overflow: auto;
 	width: 600px;
 	height: 600px;
-	padding: 50px 100px 50px 100px;
+	overflow: auto;
 }
 
-#aaaa {
-	margin-top: 1px;
+#list {
 	border: 2px solid black;
 	width: 600px;
 	height: 150px;
 	background: pink;
+}
+
+.listTable {
+	margin-top: 50px;
+	width: 300px;
 }

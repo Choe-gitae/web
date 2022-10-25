@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+body {
+	margin-top: 20px;
+	margin-left: 100px;
+	font-family: 'Trebuchet MS', serif;
+	line-height: 1.6
+}
+
+h2 {
+	
+}
+
+ul.tabs {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+ul.tabs li {
+	background: lightyellow;
+	color: #222;
+	display: inline-block;
+	padding: 10px;
+	cursor: pointer;
+	border-radius: 10px 10px 0px 0px;
+}
+
+ul.tabs li.current {
+	background: lightgreen;
+	color: #222;
+}
+
+.tab-content {
+	display: none;
+	background: #ededed;
+	padding: 10px;
+}
+
+.tab-content.current {
+	border: 2px solid black;
+	display: inherit;
+	overflow: auto;
+	width: 600px;
+	height: 600px;
+	padding: 50px 100px 50px 100px;
+}
+
+#aaaa {
+	margin-top: 1px;
+	border: 2px solid black;
+	width: 600px;
+	height: 150px;
+	background: pink;
+}

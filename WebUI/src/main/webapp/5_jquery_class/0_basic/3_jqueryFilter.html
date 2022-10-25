@@ -3,11 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <title>jquery filter</title>
+<script type="text/javascript" src="../lib/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	// 클래스 추가 $("선택자").addClass("클래스명");
+	// 1) 각 종류의 첫번째 요소 선택 (떡볶이, 와인)
+	//$("ul").find("li:eq(0)").addClass("bg");
+	$("ul > li:nth-child(1)").addClass("bg");
+	
+	// 2) 음식 중에서 두번째 요소 선택
+	//$("#food > li:eq(1)").addClass("borderBlue");
+	//$('#food > li:nth-child(2)').addClass('borderBlue');
+	$("#food").find("li:nth-child(2)").addClass("borderBlue");
+	
+	// 3) "튀김"을 포함하는 요소 선택
+	//$("ul li:contains('튀김')").addClass("borderRed");
+	$('#food > li:contains("튀김")').addClass('borderRed');
+	
+	// 4) 술 종류 중 두번째 요소 선택
+	//$('ul:eq(1) > li:nth-child(2)').addClass('borderBlue');
+	$("ul").filter("ul:eq(1)").find("li:eq(1)").addClass("border");
+})
+</script>
 
 <!--4. class 속성제어 -->
 <style type="text/css">
 	.bg { background : yellow; }
-	.border { border : 3px dotted red; }
+	.border { border : 3px dotted cyan; }
 	.borderRed { border : 3px dotted red; }
 	.borderBlue { border : 3px dotted blue; }
 </style>

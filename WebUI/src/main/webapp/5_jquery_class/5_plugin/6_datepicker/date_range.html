@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.13.2/themes/ui-lightness/jquery-ui.css" />
+<script type="text/javascript" src="../../lib/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/i18n/jquery-ui-i18n.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$("#today").text( new Date().toLocaleDateString() );
+	
+	$.datepicker.setDefaults($.datepicker.regional["ko"]);
+	$("#fromDate").datepicker({
+		minDate		: 0,
+		onClose		: function(selectedDate){
+			$("#toDate").datepicker("option","minDate",selectedDate);
+		}
+	});
+	
+	$("#toDate").datepicker({
+		onClose		: function(selectedDate){
+			$("#fromDate").datepicker("option","maxDate",selectedDate);
+		}
+	});
+	
+})
+</script>
+</head>
+<body>
+
+오늘날짜 : <span id="today"></span>
+<hr/>
+<form>
+	<label for="fromDate">시작일</label>
+	<input id="fromDate" name="fromDate" type="text">
+	~
+	<label for="toDate">종료일</label>
+	<input id="toDate" name="toDate" type="text">
+</form>
+
+</body>
+</html>

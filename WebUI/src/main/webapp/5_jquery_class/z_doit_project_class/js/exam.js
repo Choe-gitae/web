@@ -169,8 +169,6 @@ $(function(){
 			nextPanel.show();			 									// 다음 패널 보이기
 			lastBtn.attr( "src" , lastBtnSrc.replace("over","out") );		// 마지막 버튼 [src] 값 변경
 			nextBtn.attr( "src" , nextBtnSrc.replace("out","over") ); 		// 다음 버튼 [src] 값 변경
-			lastBtn = nextBtn;												// 다음 버튼 마지막 버튼으로 지정
-			lastBtnSrc = lastBtn.attr("src");								// 다음 버튼 [src] 값 저장
 		},2000)
 	})
 		// 알림판 정지버튼 인터벌 취소

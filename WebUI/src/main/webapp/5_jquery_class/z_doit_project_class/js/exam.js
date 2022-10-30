@@ -135,7 +135,6 @@ $(function(){
 			let lastBtn = $("div#roll_banner_wrap dt img[src*='over']");	// img [src]에 'over'가 포함된 요소
 			let lastBtnSrc = lastBtn.attr("src");							// 요소 [src] 속성값
 			let thisSrc = $(this).attr("src");								// 클릭한 버튼 [src]
-			//alert(btnNum+10);
 			
 			$("div#roll_banner_wrap dd").hide();	// 패널 모두 숨기기
 			$(this).closest("dt").next().show(); 	// 클릭한 버튼 패널 보이기

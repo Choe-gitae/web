@@ -25,7 +25,9 @@
 
 <!-- #############  -->
 <!-- 페이지 forward 이동된다면  -->
-		
+<!-- <a href="SecondPage.jsp">또 다른 페이지</a> -->
+<%-- <% response.sendRedirect("SecondPage.jsp"); %> --%>
+<jsp:forward page="SecondPage.jsp"></jsp:forward>
 
 </body>
 </html>

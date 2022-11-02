@@ -50,22 +50,15 @@ $(function(){
 	});
 	
 	
- 	$("#sign").click(function(){
+ 	$(".sign").click(function(){
  		var pw = $("input[name='password']").val();
  		var rePw = $("input[name='repassword']").val();
-		var param = {
- 				id		: $("input[name='id']").val(),
- 				pw		: pw,
- 				name	: $("input[name='name']").val(),
- 				tel		: $("input[name='tel']").val(),
- 				addr	: $("input[name='addr']").val(),
- 		}
  		
 		if(pw == rePw){
 			$.ajax({
 				type	: "get",
 				url		: "InsertMember.jsp",
-				data	: param,
+				data	: $("form[name='frm']").serialize(),
 				dataType: "text",
 				success	: clear
 			})
@@ -140,7 +133,7 @@ $(function(){
          <tr>
             <td width="100">
              <!--로그인 버튼-->
-             <input type="button" value="회원가입" id="sign" disabled>
+             <input type="button" value="회원가입" class="sign" disabled>
             </td>
             <td width="100">
             <input type="reset" name="cancel" value="취소"><br/>

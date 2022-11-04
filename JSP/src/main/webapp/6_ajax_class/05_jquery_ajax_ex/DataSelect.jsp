@@ -36,7 +36,7 @@ String rtn_json="";
 		rtn_json += " 'name':'" + rs.getString("name") + "',";
 		rtn_json += " 'age':'" + rs.getString("age") + "',";
 		rtn_json += " 'tel':'" + rs.getString("tel") + "',";
-		rtn_json += " 'addr':'" + rs.getString("addr") + "',";
+		rtn_json += " 'addr':'" + rs.getString("addr") + "' ";
 	}
 	rtn_json += "}";
 	rs.close();
@@ -45,8 +45,8 @@ String rtn_json="";
 
 	
 
-	System.out.println(rtn_xml);
+	System.out.println(rtn_json);
 	
-	out.write(rtn_xml);
+	out.write(rtn_json);
 
 %>

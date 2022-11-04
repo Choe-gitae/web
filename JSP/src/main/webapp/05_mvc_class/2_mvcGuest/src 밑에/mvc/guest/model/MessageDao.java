@@ -1,4 +1,4 @@
-package guest.model;
+package mvc.guest.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,11 +16,12 @@ public class MessageDao {
 	
 	// DB 연결시  관한 변수 
 	private static final String 	dbDriver	=	"oracle.jdbc.driver.OracleDriver";
-	private static final String		dbUrl		=	"jdbc:oracle:thin:@127.0.0.1:1521:xe";
-	private static final String		dbUser		=	"choe";
-	private static final String		dbPass		=	"1234";
+	private static final String		dbUrl		=	"jdbc:oracle:thin:@127.0.0.1:1521:orcl";
+	private static final String		dbUser		=	"scott";
+	private static final String		dbPass		=	"tiger";
 	
 	
+	private Connection	 		con;	
 	
 	//--------------------------------------------
 	//#####	 객체 생성하는 메소드 
@@ -42,9 +43,7 @@ public class MessageDao {
 				1. 오라클 드라이버를 로딩
 					( DBCP 연결하면 삭제할 부분 )
 			*/
-			Class.forName(dbDriver);
-			System.out.println("드라이버 로딩 성공");
-
+			Class.forName( dbDriver );	
 		}catch( Exception ex ){
 			throw new MessageException("방명록 ) DB 연결시 오류  : " + ex.toString() );	
 		}
@@ -55,28 +54,24 @@ public class MessageDao {
 	/*
 	 * 메세지를 입력하는 함수
 	 */
-	public void insert(Message rec) throws MessageException
+	public int insert(Message rec) throws MessageException
 	{
-		Connection	 		con = null;
-		PreparedStatement	ps = null;
+
+		PreparedStatement ps = null;
 		try{
 
-			// 1. 연결객체(Connection) 얻어오기
-			con = DriverManager.getConnection(dbUrl,dbUser,dbPass);
-			System.out.println("DB연결 성공");
-			// 2. sql 문장 만들기
-			String sql = " INSERT INTO GUESTTB(MESSAGE_ID,GUEST_NAME,PASSWORD,MESSAGE) "
-					+ " VALUES(SEQ_GUESTTB_MESSAGEID.NEXTVAL,?,?,?) ";
-			// 3. 전송객체 얻어오기
-			ps = con.prepareStatement(sql);
-			ps.setString(1, rec.getGuestName());
-			ps.setString(2, rec.getPassword());
-			ps.setString(3, rec.getMessage());
+			con	= DriverManager.getConnection( dbUrl, dbUser, dbPass );
 			
-			// 4. 전송하기
-			ps.executeUpdate();
+			String sql		= "INSERT INTO guestTB VALUES(seq_guestTb_messageId.nextval,?,?,?)";  
+
+			ps		= con.prepareStatement( sql );
 			
-				
+			ps.setString	( 1, rec.getGuestName()	);
+			ps.setString	( 2, rec.getPassword()	);
+			ps.setString	( 3, rec.getMessage()	);
+			
+			return ps.executeUpdate();
+					
 		}catch( Exception ex ){
 			throw new MessageException("방명록 ) DB에 입력시 오류  : " + ex.toString() );	
 		} finally{
@@ -86,36 +81,33 @@ public class MessageDao {
 	
 	}
 	
-	private PreparedStatement PreparedStatement(String sql) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	/*
 	 * 메세지 목록 전체를 얻어올 때
 	 */
 	public List<Message> selectList() throws MessageException
 	{
-		Connection	 		con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Message> mList = new ArrayList<Message>();
 		boolean isEmpty = true;
 		
 		try{
-			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
-			
-			String sql = " SELECT * FROM guesttb ";
-			ps = con.prepareStatement(sql);
+
+			con	= DriverManager.getConnection( dbUrl, dbUser, dbPass );
+			String sql		= "SELECT * FROM guestTB order by message_id desc";  
+			ps		= con.prepareStatement( sql );
 			rs = ps.executeQuery();
-			while(rs.next()) {
-				Message m = new Message();
-				m.setMessageId(rs.getInt("MESSAGE_ID"));
-				m.setGuestName(rs.getString("GUEST_NAME"));
-				m.setMessage(rs.getString("MESSAGE"));
-				
-				mList.add(m);
+			while( rs.next())
+			{
 				isEmpty = false;
+				
+				int message_id = rs.getInt("message_id");
+				String guest_name = rs.getString("guest_name");
+				String password = rs.getString("password");
+				String message = rs.getString("message");
+				
+				Message m = new Message(message_id, guest_name, password, message );
+				mList.add(m);
 			}
 			
 			if( isEmpty ) return Collections.emptyList();
@@ -136,34 +128,35 @@ public class MessageDao {
 	 */
 	public List<Message> selectList(int firstRow, int endRow) throws MessageException
 	{
-		Connection	 	   con = null;
-		PreparedStatement 	ps = null;
-		ResultSet 			rs = null;
-		List<Message> 	 mList = new ArrayList<Message>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Message> mList = new ArrayList<Message>();
 		boolean isEmpty = true;
 		
 		try{
-			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
 
-			String sql = "SELECT * "
-					+ " FROM	guesttb "
-					+ " WHERE	message_id IN ( SELECT message_id "
-					+ "						FROM (SELECT rownum rnum, message_id "
-					+ "	  						  FROM (SELECT message_id FROM guesttb ORDER BY message_id) ) "
-					+ "							  WHERE rnum >= ? AND rnum <= ? ) "
-					+ " ORDER BY message_id DESC ";
-			ps = con.prepareStatement(sql);
+			con	= DriverManager.getConnection( dbUrl, dbUser, dbPass );
+			String sql		= "SELECT * FROM guestTB	"
+								+ "WHERE message_id IN "
+								+ "	( SELECT message_id FROM ( SELECT message_id, rownum AS rnum "
+								+ "	  FROM ( SELECT message_id FROM guestTB  ORDER BY message_id DESC ) ) "
+								+ "	  WHERE rnum >= ? AND rnum <= ? ) "
+								+ " ORDER BY message_id DESC";  
+			ps		= con.prepareStatement( sql );
 			ps.setInt(1, firstRow);
-			ps.setInt(2, endRow);
+			ps.setInt(2, endRow );
 			rs = ps.executeQuery();
-			while(rs.next()) {
-				Message m = new Message();
-				m.setMessageId(rs.getInt("MESSAGE_ID"));
-				m.setGuestName(rs.getString("GUEST_NAME"));
-				m.setMessage(rs.getString("MESSAGE"));
-
-				mList.add(m);
+			while( rs.next())
+			{
 				isEmpty = false;
+				
+				int message_id = rs.getInt("message_id");
+				String guest_name = rs.getString("guest_name");
+				String password = rs.getString("password");
+				String message = rs.getString("message");
+				
+				Message m = new Message(message_id, guest_name, password, message );
+				mList.add(m);
 			}
 			
 			if( isEmpty ) return Collections.emptyList();
@@ -185,20 +178,16 @@ public class MessageDao {
 	 */
 	
 	public int getTotalCount() throws MessageException{
-		Connection	 		con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int count = 0;
 		
 		try{
-			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
-			String sql = " SELECT count(*) as cnt FROM guesttb ";
-			ps = con.prepareStatement(sql);
+			con	= DriverManager.getConnection( dbUrl, dbUser, dbPass );
+			String sql		= "SELECT count(*) FROM guestTB";  
+			ps		= con.prepareStatement( sql );
 			rs = ps.executeQuery();
-			if(rs.next()) {
-				count = rs.getInt("cnt");
-			}
-			return  count;
+			rs.next();		
+			return  rs.getInt(1);
 			
 		}catch( Exception ex ){
 			throw new MessageException("방명록 ) DB에 목록 검색시 오류  : " + ex.toString() );	
@@ -214,21 +203,20 @@ public class MessageDao {
 	 */
 	public int delete( int messageId, String password ) throws MessageException
 	{
-		int result = 0;
-		Connection	 		con = null;
 		PreparedStatement ps = null;
 		try{
-			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
-			System.out.println("드라이버 연결 성공");
+
+			con	= DriverManager.getConnection( dbUrl, dbUser, dbPass );
 			
-			String sql = " DELETE FROM GUESTTB WHERE MESSAGE_ID = ? AND PASSWORD LIKE ? ";
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, messageId);
-			ps.setString(2, password);
+			String sql		= "DELETE FROM guestTB WHERE message_id=? AND password=?";  
+
+			ps		= con.prepareStatement( sql );
 			
-			result = ps.executeUpdate();
+			ps.setInt	( 1, messageId	);
+			ps.setString	( 2, password	);
 			
-			return result;
+			return ps.executeUpdate();
+					
 		}catch( Exception ex ){
 			throw new MessageException("방명록 ) DB에 삭제시 오류  : " + ex.toString() );	
 		} finally{

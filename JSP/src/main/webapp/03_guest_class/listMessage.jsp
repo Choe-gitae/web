@@ -9,32 +9,33 @@
 	String prevBtn = request.getParameter("prevBtn");
 	String nextBtn = request.getParameter("nextBtn");
 	String sPage   = request.getParameter("startPage");
+	
 	// 전체 메세지 레코드 검색 
 	ListMessageService service = ListMessageService.getInstance();
-	List <Message> mList =  service.getMessageList(pageNum);
+	List <Message> mList = service.getMessageList(pageNum);
 	
 	// 페이지 계산
 	if( pageNum == null ) pageNum = "1";
 	if( sPage == null ) sPage = "1";
 	
 	int totalPageCount 	= service.getTotalPage();
-	int pages 			= 5;
+	int countPerPages	= 5;
 	int startPage 		= Integer.parseInt(sPage);
-	int endPage 		= startPage + pages - 1 ;
+	int endPage 		= startPage + countPerPages - 1 ;
 	
-	if( totalPageCount <= pages ){
+	if( totalPageCount <= countPerPages ){
 		endPage = totalPageCount;
 	}
 	
 	if( prevBtn != null ){
-		startPage -= pages;
+		startPage -= countPerPages;
 		if ( startPage < 1 ) startPage = 1 ;
-		endPage = startPage + pages - 1 ;
+		endPage = startPage + countPerPages - 1 ;
 	}else if( nextBtn != null ){
-		startPage += pages;
-		endPage = startPage + pages - 1 ;
+		startPage += countPerPages;
+		endPage = startPage + countPerPages - 1 ;
 		if ( endPage > totalPageCount )	endPage = totalPageCount;
-		if ( startPage > endPage )		startPage -= pages;
+		if ( startPage > endPage )		startPage -= countPerPages;
 	}
 %>    
 <!DOCTYPE html>

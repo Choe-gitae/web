@@ -18,17 +18,10 @@ $(function(){
 		// AJAX 통신
 		// (1) 사용자 입력값을 객체형식으로 저장
 		//		-> 추후에 form객체 serialize() 참고
-		var param = {
-				name	: $("#name").val(),
-				age		: $("#age").val(),
-				tel		: $("#tel").val(),
-				addr	: $("#addr").val()
-		}
-		//alert(param);
 		$.ajax({
 			type	: "get",
 			url		: "DataInput.jsp",
-			data	: param,
+			data	: $("form[name='inForm']").serialize(),
 			success	: function(data){
 				//alert("<"+data+">");
 				if( data.trim() == 1 ){
@@ -49,7 +42,7 @@ $(function(){
 		$.ajax({
 			type	: "get",
 			url		: "DataSelect.jsp",
-			dataType: "xml",
+			dataType: "json",
 			success	: selectResult
 		})
 	});

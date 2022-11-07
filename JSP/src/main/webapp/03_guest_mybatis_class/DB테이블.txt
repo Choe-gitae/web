@@ -1,0 +1,19 @@
+테이블명 ㅣ comment_tab
+
+comment_no		number PK 		글번호
+user_id			varchar2(30)	작성자
+comment_content	varchar2(1024)	내용
+reg_date		date			작성일
+
+레코드 적당히 입력
+
+
+CREATE TABLE comment_tab
+(
+	comment_no		number,
+	user_id			varchar2(30),
+	comment_content	varchar2(1024),
+	reg_date		DATE,
+	CONSTRAINT pk_comment_no PRIMARY KEY (comment_no)
+);
+CREATE SEQUENCE seq_comment;
